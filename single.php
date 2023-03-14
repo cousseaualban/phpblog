@@ -7,16 +7,7 @@
         die ("L'article demandé n'existe pas ! ");
     }
     // Connexion à la BDD en PDO
-
-    $host = 'localhost';
-    $user = 'root';
-    $pwd = '';
-    $dbName = "mBlog";
-
-    $pdo = new PDO('mysql:host='.$host.';dbname='.$dbName.';charset-utf8',$user,$pwd, [
-        PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-    ]);
+    require_once 'db.php';
 
     $query = $pdo->prepare('SELECT * FROM posts WHERE id = :post_id');
     $query->execute(array('post_id' => $id));
@@ -45,7 +36,7 @@
       <h1 class="logo-text"><span>Ron</span>asdev</h1>
     </div>
     <ul class="nav">
-      <li><a href="index.html">Accueil</a></li>
+      <li><a href="index.php">Accueil</a></li>
       <li><a href="#">A propos</a></li>
       <li><a href="#">Services</a></li>
       <li><a href="#">S'inscrire</a></li>
