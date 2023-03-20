@@ -8,4 +8,16 @@
             die ("L'article demandé n'existe pas ! ");
         }
 
+// Sauvegarde d'un commentaire
+if(isset($_POST['add-comment'])){
+    if(!empty($_POST['author']) && !empty($_POST['comment'])){
+        $author = $_POST['author'];
+        $comment = $_POST['comment'];
+        $id = $_POST['id'];
+
+        saveComment($author, $id, $comment);
+        header('Location: single.php?id='.$_POST['id']);
+        exit();
+    }
+}
 ?>

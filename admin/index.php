@@ -1,4 +1,10 @@
-<?php 
+<?php
+
+$perPage = 3;
+$nombreTotal ;
+$noPage = 1;
+// $pages $nombreTotal/$perPage;
+
     require_once '../refactoring.php';
     $posts = selectAll();
 ?>
@@ -49,7 +55,7 @@
                             <td><?= $post['title'] ?></td>
                             <td><?= $post['author'] ?></td>
                             <td><a href="edit.php?id=<?php echo $post['id'] ?>" class="edit">edit</a></td>
-                            <td><a href="" class="delete">delete</a></td>
+                            <td><a href="edit.php?delete_id=<?php echo $post['id'] ?>" class="delete">delete</a></td>
                         </tr>
                     </tbody>
                     <?php endforeach ?> 

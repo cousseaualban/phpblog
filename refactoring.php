@@ -35,6 +35,10 @@
         return $post;
     }
 
+    // Sélection de tous les articles
+    function pagination(){
+        global $pdo;
+    }
     // Enregistrement d'un article
     function create($author, $title, $content, $image){
         global $pdo;
@@ -61,5 +65,37 @@
             'image' => $image,
             'id' => $id
         ]);
+    }
+
+    // Supprimer un article
+    function deletePost($id){
+        global $pdo;
+
+        $query = $pdo->prepare('DELETE FROM posts WHERE id = :id');
+        $query->execute(['id'=>$id]);
+    }
+
+    // Sauvegarder un commentaire
+    function saveComment($author, $id_post, $comment){
+        global $pdo;
+
+        $query = $pdo->prepare('INSERT INTO comments(id_post, author, comment, created_at) VALUES(:id_post, :author, :comment, NOW())');
+        $query -> execute([
+            'id_post' => $id_post,
+            'author' => $author,
+            'comment' => $comment
+        ]);
+    }
+
+    // Récupérer les commentaires dans la BDD
+    function findAllComments($id_post){
+        global $pdo;
+
+        $query = $pdo->prepare('SELECT * FROM comments WHERE id_post = :post_id ORDER BY created_at DESC');
+        $query->execute([
+            'post_id' => $id_post
+        ]);
+        $comments = $query->fetchAll();
+        return $comments;
     }
 ?>

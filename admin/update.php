@@ -54,4 +54,10 @@ if (isset($_POST['update-post'])){
         }
 }
 
+if(isset($_GET['delete_id'])){
+    deletePost($_GET['delete_id']);
+    header('Location: index.php');
+    exit();
+}
+
 ?>

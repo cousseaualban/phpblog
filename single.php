@@ -2,7 +2,9 @@
     require_once 'refactoring.php';
     include_once('traitement.php');
 
+    // Récupération d'un article et de ses commentaires à partir de son ID
     $post = selectOne($id);
+    $comments = findAllComments($id);
 
 ?>
 
@@ -43,20 +45,22 @@
           <small><strong><?= $post['author'] ;?></strong> : publiée le <?= $post['created_at']?></small>
         </div>
     
-        <!-- <h1>Les commentaires</h1>
+        <h1>Les commentaires</h1>
         <div class="comments">
           
-            <div class="comment">
-              <h3 class="auteur">Ecrit par Ronasdev : </h3>
-              <p class="contenu" >J'apprecie beaucoup ta chaine.Continue à n ous faire du bien<br>
-              <i class="far fa-calendar"> depuis 16 Mai 2021</i>
+            <div class="comment"> 
+              <?php foreach($comments as $comment): ?>
+              <h3 class="auteur">Ecrit par <?= $comment['author'] ?></h3>
+              <p class="contenu" ><?= $comment['comment'] ?><br>
+              <i class="far fa-calendar"><?= date('d F, Y', strtotime($comment['created_at'])); ?></i>
               <a class="sup" href="">Supprimer</a>
               </p>
               <br>
             </div>
+            <?php endforeach; ?>
         </div>
         <br>
-        <form action="single.php"  method="post">
+        <form action="single.php?id=<?= $id ?>"  method="post">
           <input type="hidden" name="id" value="<?php echo $id ?>">
           <div>
             <label>Votre Prenom:</label>
@@ -74,7 +78,7 @@
       </div>
     </div>
   </div>
-      // Main Content -->
+      <!-- // Main Content -->
 
      
 

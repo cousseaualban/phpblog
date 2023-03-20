@@ -1,6 +1,5 @@
 <?php require_once ('../refactoring.php'); ?>
 <?php include('update.php') ?>
-<?php include('formErrors.php') ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -36,6 +35,7 @@
             <div class="container">
 
                 <h2 class="page-title">Modifier un article</h2>
+                <?php include('formErrors.php') ?>
 
                 <form action="edit.php" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="id" value="<?= $id; ?>">
