@@ -1,6 +1,21 @@
 <?php 
     require_once 'db.php';
 
+    // Validation d'un article
+    function validatePost($post){
+        $errors = array();
+        if(empty($post['author'])){
+            array_push($errors, 'Veuillez écrire votre nom');
+        }
+        if(empty($post['title'])){
+            array_push($errors, 'Veuillez saisir un titre d\'article');
+        }
+        if(empty($post['content'])){
+            array_push($errors, 'Veuillez rédiger le contenu de l\'article');
+        }
+        return $errors;
+    }
+
     // Récupération de tous les articles
     function selectAll(){
         global $pdo;
@@ -32,5 +47,19 @@
             'image' => $image
         ]);
 
+    }
+
+    // Modification d'un article
+    function updatePost($id, $author, $title, $content, $image){
+        global $pdo;
+
+        $query = $pdo->prepare('UPDATE posts SET author = :auteur, title = :titre, content = :contenu, image = :image WHERE id = :id');
+        $query -> execute([
+            'auteur' => $author,
+            'titre' => $title,
+            'contenu' => $content,
+            'image' => $image,
+            'id' => $id
+        ]);
     }
 ?>
