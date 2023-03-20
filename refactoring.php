@@ -17,10 +17,10 @@
     }
 
     // Récupération de tous les articles
-    function selectAll(){
+    function selectAll($noPage, $perPage){
         global $pdo;
-
-        $results = $pdo->query('SELECT * FROM posts ORDER BY created_at DESC LIMIT 0,3');
+    // 3 *($noPage = 1)
+        $results = $pdo->query('SELECT * FROM posts ORDER BY created_at DESC LIMIT '. ($perPage*($noPage-1)).','.$perPage);
         $posts = $results->fetchAll();
         return $posts;    
     }
@@ -38,6 +38,11 @@
     // Sélection de tous les articles
     function pagination(){
         global $pdo;
+        $query = $pdo->prepare('SELECT COUNT(*) as nbr_articles FROM posts');
+        $query->execute([]);
+        $nombre = $query->fetch();
+
+        return $nombre['nbr_articles'];
     }
     // Enregistrement d'un article
     function create($author, $title, $content, $image){
