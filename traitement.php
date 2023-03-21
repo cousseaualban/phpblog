@@ -20,4 +20,10 @@ if(isset($_POST['add-comment'])){
         exit();
     }
 }
+
+// Suppression d'un commentaire en fonction de son ID
+if (isset($_GET['delete'])) {
+    $comment_id = $_GET['delete'];
+    deleteComment($comment_id);
+}
 ?>

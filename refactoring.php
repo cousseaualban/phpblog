@@ -93,11 +93,11 @@
     }
 
         // Supprimer un commentaire
-        function deleteComment($id_post){
+        function deleteComment($id){
             global $pdo;
     
-            $query = $pdo->prepare('DELETE FROM comments WHERE id_post = :post_id');
-            $query->execute(['post_id'=>$id_post]);
+            $query = $pdo->prepare('DELETE FROM comments WHERE id = :id');
+            $query->execute(['id'=>$id]);
         }
 
     // Récupérer les commentaires dans la BDD

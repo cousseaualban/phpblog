@@ -5,7 +5,7 @@
     // Récupération d'un article et de ses commentaires à partir de son ID
     $post = selectOne($id);
     $comments = findAllComments($id);
-
+  
 ?>
 
 <!DOCTYPE html>
@@ -53,7 +53,7 @@
               <h3 class="auteur">Ecrit par <?= $comment['author'] ?></h3>
               <p class="contenu" ><?= $comment['comment'] ?><br>
               <i class="far fa-calendar"><?= date('d F, Y', strtotime($comment['created_at'])); ?></i>
-              <a class="sup" href="single.php?id=<?= $id ?>" action="<?php deleteComment($comment['id_post']) ?>">Supprimer</a>
+              <a class="sup" href="single.php?id=<?= $id ?>&delete=<?= $comment['id'] ?>">Supprimer</a>
               </p>
               <br>
             </div>
