@@ -25,5 +25,8 @@ if(isset($_POST['add-comment'])){
 if (isset($_GET['delete'])) {
     $comment_id = $_GET['delete'];
     deleteComment($comment_id);
+
+    header('Location: single.php?id='.$_GET['id']);
+    exit();
 }
 ?>
